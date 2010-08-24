@@ -1,0 +1,28 @@
+# Description: a freedesktop.org compliant menu implementation for Xfce
+# URL: http://www.xfce.org/
+# Maintainer: fancris3, fancris3 at gmail dot com
+# Depends on: libxfce4menu-git glib
+
+name=libxfce4menu-git
+version=20100824
+release=2208
+source=()
+
+build () {
+if cd $PKGMK_ROOT/$name ; then
+	git pull
+else
+    rname="$(echo $name | sed -e 's/-git//')"
+    git clone git://git.xfce.org/xfce/$rname $PKGMK_ROOT/$name
+fi
+cp -r $PKGMK_ROOT/$name $SRC/ && cd $SRC/$name
+    rm -rf po/*.po docs
+    sed -i '/docs/d' Makefile.am configure.*
+    sed -i '/gtk-doc.make/d' Makefile.am
+    sed -i '/GTK_DOC_CHECK/d' configure.*
+    ./autogen.sh --prefix=/usr --disable-static --disable-nls \
+                 --mandir=/usr/man \
+                 --disable-debug
+    make
+    make DESTDIR=$PKG install
+}

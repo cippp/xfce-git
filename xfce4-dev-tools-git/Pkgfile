@@ -1,0 +1,24 @@
+# Description: Autoconf macros and scripts to augment app build systems
+# URL: http://www.xfce.org/
+# Maintainer: fancris3, fancris3 at gmail dot com
+# Depends on: automake git
+
+name=xfce4-dev-tools-git
+version=20100824
+release=2208
+source=()
+
+build () {
+if cd $PKGMK_ROOT/$name ; then
+	git pull
+else
+    rname="$(echo $name | sed -e 's/-git//')"
+    git clone git://git.xfce.org/xfce/$rname $PKGMK_ROOT/$name
+fi
+cp -r $PKGMK_ROOT/$name $SRC/ && cd $SRC/$name
+
+    ./autogen.sh --prefix=/usr \
+                 --mandir=/usr/man
+    make
+    make DESTDIR=$PKG install
+}

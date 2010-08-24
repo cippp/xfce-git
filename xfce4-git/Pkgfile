@@ -1,0 +1,14 @@
+# Description: The desktop environment XFce4
+# URL: http://www.xfce.org
+# Maintainer: fancris3, fancris3 at gmail dot com
+# Depends on: exo-git garcon-git gtk-xfce-engine-git libxfce4menu-git libxfce4ui-git libxfce4util-git terminal-git thunar-git xfce4-appfinder-git xfce4-dev-tools-git xfce4-git xfce4-icon-theme xfce4-panel-git xfce4-session-git xfce4-settings-git xfconf-git xfdesktop-git xfwm4-git
+
+name=xfce4
+version=1
+release=1
+source=()
+
+build () {
+  install -d $PKG/usr/etc
+  echo "$name version $version" > $PKG/usr/etc/$name
+}

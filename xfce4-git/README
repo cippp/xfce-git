@@ -1,0 +1,23 @@
+README for xfce 4.6.x
+
+REQUIREMENTS
+
+PRE-INSTALL
+
+  Be sure that you don't have xfce 4.4.x installed, or remove it.
+
+POST-INSTALL
+
+PRECAUTION
+
+  Update/install ports in the following order:
+   
+    - libxfce4util
+    - libxfcegui4
+    - libxfce4menu
+    - xfconf
+    - all the rest ...
+    
+  or use prt-get:
+
+    prt-get update `prt-get quickdep xfce4`
