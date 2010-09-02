@@ -12,14 +12,11 @@ build () {
 if cd $PKGMK_ROOT/$name ; then
 	git pull
 else
-    rname="$(echo $name | sed -e 's/-git//')"
-    git clone git://git.xfce.org/art/$rname $PKGMK_ROOT/$name
+    git clone git://git.xfce.org/art/${name%-*} $PKGMK_ROOT/$name
 fi
 cp -r $PKGMK_ROOT/$name $SRC/ && cd $SRC/$name
-    rm -rf po/*.po
-    sed -i '/docs/d' Makefile.am configure.*
+    sed -i '/docs/d;/GTK_DOC_CHECK/d' Makefile.am configure.*
     sed -i '/gtk-doc.make/d' Makefile.am
-    sed -i '/GTK_DOC_CHECK/d' configure.*
     ./autogen.sh --prefix=/usr --disable-static --disable-nls \
                  --mandir=/usr/man \
                  --disable-debug

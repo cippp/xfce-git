@@ -12,11 +12,9 @@ build () {
 if cd $PKGMK_ROOT/$name ; then
 	git pull
 else
-    rname="$(echo $name | sed -e 's/-git//')"
-    git clone git://git.xfce.org/xfce/$rname $PKGMK_ROOT/$name
+    git clone git://git.xfce.org/xfce/${name%-*} $PKGMK_ROOT/$name
 fi
 cp -r $PKGMK_ROOT/$name $SRC/ && cd $SRC/$name
-
     ./autogen.sh --prefix=/usr --disable-static --disable-nls \
                  --mandir=/usr/man \
                  --disable-debug

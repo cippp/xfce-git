@@ -20,7 +20,6 @@ xfwm4-git
 xfce4-appfinder-git
 libxfce4menu-git
 xfce4-panel-git
-thunar-git
 xfdesktop-git
 terminal-git
 thunar-git
